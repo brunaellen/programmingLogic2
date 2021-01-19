@@ -1,0 +1,78 @@
+<canvas width="600" height="600"></canvas>
+
+<script>
+
+    /* criar um alvo que se movimenta na tela
+    steps:
+    - criar a tela
+    - criar 3 circulos
+    - criar coordenadas aleatorias para o circulo aparecer em diferentes  coordenadas dentro da tela criada 
+    - criar uma funcao para limpar a tela sempre que a coordenada do x e y mudar
+    - fazer com que ao clicar no centro do circulo, uma alerta apareca(acertou no centro), com uma margem de erro de 10 pixels.
+    */
+
+    var canvas = document.querySelector("canvas");
+    var paintBrush = canvas.getContext("2d");
+    var radius = 10;
+    var xRandom = 200;
+    var yRandom = 200;
+    var widthCanvas = 600;
+    var heightCanvas= 600;
+
+    function createCanvas(){
+        paintBrush.fillStyle = "lightgray";
+        paintBrush.fillRect(0, 0, widthCanvas, heightCanvas);
+    }
+
+    function createTarget(x, y){
+        paintBrush.fillStyle = "red";
+        paintBrush.beginPath();
+        paintBrush.arc(x, y, radius*3, 0, 2 * Math.PI);
+        paintBrush.fill();
+
+        paintBrush.fillStyle = "white";
+        paintBrush.beginPath();
+        paintBrush.arc(x, y, radius*2, 0, 2 * Math.PI);
+        paintBrush.fill();
+
+        paintBrush.fillStyle = "red";
+        paintBrush.beginPath();
+        paintBrush.arc(x, y, radius, 0, 2 * Math.PI);
+        paintBrush.fill();
+    }
+
+    function cleanCanvas(){
+        paintBrush.clearRect(0, 0, 600, 600);
+    }
+
+    /*function coordenadasxy(maximo){
+        return Math.floor(Math.random() * maximo);
+    }*/
+
+    function createRandomTarget(){
+        cleanCanvas();
+        createCanvas();
+        xRandom = Math.floor(Math.random() * widthCanvas);
+        yRandom = Math.floor(Math.random() * heightCanvas);
+        createTarget(xRandom, yRandom);
+        console.log(xRandom + "," + yRandom);
+    }
+
+    setInterval(createRandomTarget, 2000);
+
+    function alertYouGotTheTarget(event){
+        var xClick = event.pageX - canvas.offsetLeft;
+        var yClick = event.pageY - canvas.offsetTop;
+
+        if((xClick > xRandom - radius)
+        && (xClick < xRandom + radius)
+        && (yClick > yRandom - radius) 
+        && (yClick < xRandom + radius)) {
+            alert(" You got the target!")
+        }
+    }
+
+    canvas.onclick = alertYouGotTheTarget;
+
+
+</script>

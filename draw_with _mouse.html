@@ -1,0 +1,55 @@
+<canvas width="600" height="600"></canvas>
+<br>
+
+Escolha uma cor<input type ="color">
+
+<script>
+
+    var canvas = document.querySelector("canvas");
+    var paintBrush = canvas.getContext("2d");
+    paintBrush.fillStyle = "grey";
+    paintBrush.fillRect(0, 0, 600, 600);
+
+    var input = document.querySelector("input");
+
+    var draw = false;
+    var radius = 10;
+
+
+    function drawCircle(event){
+        
+        var x = event.pageX - canvas.offsetLeft;
+        var y = event.pageY - canvas.offsetTop;
+
+        if(draw){
+            paintBrush.fillStyle = input.value;
+            paintBrush.beginPath();
+            paintBrush.arc(x, y, radius, 0, 2* 3.14);
+            paintBrush.fill();
+            console.log(x + ',' + y);
+        } 
+    }
+
+    function calculateRadius(event) {
+        if (event.shiftKey && radius + 10 <=40) {
+            radius = radius + 10;
+        } else if (event.altKey && radius - 5 >= 10){
+            radius = radius - 5;
+        }
+    }
+    
+    canvas.onclick = calculateRadius;
+    canvas.onmousemove = drawCircle;
+
+    function enableDraw (){
+        draw = true;
+    }
+
+    function disableDraw (){
+        draw = false;
+    }
+
+    canvas.onmousedown = enableDraw;
+
+    canvas.onmouseup = disableDraw;
+</script>

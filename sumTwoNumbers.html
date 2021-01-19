@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Test</title>
+    </head>
+    <body>
+        <form>
+        <table>
+            <thead>
+                <tr>
+                    <td>First Value</td>
+                    <td>Second Value</td>
+                    <td>Sum</td>
+                </tr>
+            </thead>
+            <tr>
+                <td><input type="number" id="txtValue1" placeholder="Insert first value" /></td>
+                <td><input type="number" id="txtValue2" placeholder="Insert second value" /></td>
+                <td><input type="number" readonly="true" id="txtSum" /></td>
+            </tr>
+            <tr>
+                <td colspan="3"><input type="button" onclick="performSum();" value="Calculate sum" width="200px"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+
+<script lang="javascript">
+
+    function calculateSum(value1, value2) {
+        return parseInt(value1) + parseInt(value2);
+    }
+
+    function performSum() {
+        var value1 = document.getElementById("txtValue1").value;
+        var value2 = document.getElementById("txtValue2").value;
+        var sum = calculateSum(value1, value2);
+        
+        document.getElementById("txtSum").value = sum;
+    }
+</script>

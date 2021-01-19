@@ -1,0 +1,60 @@
+<canvas width="800" height="600"></canvas>
+
+<script>
+
+    var canvas = document.querySelector("canvas");
+    var paintBrush = canvas.getContext("2d");
+
+    var widthRectangle = 400;
+    var heightOfRectangle = 300;
+    var rectangleX = 200;
+    var rectangleY = 150;
+
+    //retângulo
+    paintBrush.fillStyle = "green";
+    paintBrush.fillRect(rectangleX, rectangleY, widthRectangle, heightOfRectangle); 
+
+    //primeiro losango
+    var firstPointX = rectangleX + (widthRectangle/2);
+    var firstPointY = rectangleY + 20;
+
+    var secondPointX = rectangleX + 20;
+    var secondPointY = rectangleY + (heightOfRectangle/2);
+
+    var thirdPointX = rectangleX + (widthRectangle - 20);
+    var thirdPointY = rectangleY +(heightOfRectangle/2);
+
+    
+    paintBrush.fillStyle = "yellow";
+    paintBrush.beginPath();
+    paintBrush.moveTo(firstPointX, firstPointY);
+    paintBrush.lineTo(secondPointX, secondPointY);
+    paintBrush.lineTo(thirdPointX, thirdPointY);
+    paintBrush.fill();
+
+    ////segundo losango
+    var firstPointX = rectangleX + (widthRectangle/2);
+    var firstPointY = rectangleY + (heightOfRectangle - 20);
+
+    var secondPointX = rectangleX + 20;
+    var secondPointY = rectangleY + (heightOfRectangle/2);
+
+    var thirdPointX = rectangleX + (widthRectangle - 20);
+    var thirdPointY = rectangleY +(heightOfRectangle/2);
+
+    paintBrush.fillStyle = "yellow";
+    paintBrush.beginPath();
+    paintBrush.moveTo(firstPointX, firstPointY);
+    paintBrush.lineTo(secondPointX, secondPointY);
+    paintBrush.lineTo(thirdPointX, thirdPointY);
+    paintBrush.fill();
+
+    //círculo
+    var x = rectangleX + (widthRectangle/2);
+    var y = rectangleY + (heightOfRectangle/2);
+    paintBrush.fillStyle = "darkblue";
+    paintBrush.beginPath();
+    paintBrush.arc(x, y, 70, 0, 2*3.14); //centro do círculo(x/y) // raio:70/ ângulo inicial:0//ângulo final em radiano:2*3.14
+    paintBrush.fill();
+
+</script>

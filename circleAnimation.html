@@ -1,0 +1,77 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+/*an animation with a circle,
+making it go back and forth on the canvas (600,400) */
+
+/* passos:
+- criar a tela;
+- criar borda da tela;
+- criar círculo;
+- Criar uma animação do círculo! não deixar aparecer vários círculos, fazer o círculo, 
+apagar e depois refazer o círculo mais a frente até chegar no limíte da tela.
+- cria um incremento no x para que o círculo seja desenhado cada vez mais a frente(esquerda para a direita)
+- fazer com que o círculo pare quando chegar no limite da tela x = 600;
+- fazer com que o círculo vá da direita para a esquerda;
+- fazer com que o círculo pare quando chegar no limite da tela(x = 0);
+- fazer com que o círculo retorne a incrementar da (esquerda para a direita);
+delimitar o tempo de criação do círculo;
+ */
+    function drawCanvas(){ /* funcao p desenhar tela */
+        paintBrush.fillStyle = "lightgray"; /* setando a cor da tela */
+    paintBrush.fillRect(0, 0, 600, 400); /* setando as dimensoes da tela */
+    }
+
+    function drawEdgeOncanvas(){ /* funcao p desenhar borda na tela */
+        paintBrush.strokeStyle = "black"; /* setando a cor da borda da tela */
+        paintBrush.strokeRect(0, 0, 600, 400); /* setando as dimensoes da borda da tela */
+        paintBrush.fill(); /* comando p preencher a borda da tela */
+    }
+
+    function drawCircle(x, y, radius){ /* funcao p desenhar circulo */
+        paintBrush.fillStyle = "pink"; /* setando a cor do circulo */
+        paintBrush.beginPath(); /* comando do pincel para comecar a desenhar o circulo */
+        paintBrush.arc(x, y, radius, 0, 2 * Math.PI); /* delimitando as dimensoes p desenhar o circulo */
+        paintBrush.fill(); /* comando p preencher o circulo */
+    }
+
+    function cleanCanvas(){ /* funcao p limpar a tela cad vez que um círculo for desenhado */
+        paintBrush.clearRect(0, 0, 600, 400);/* dimensoes da tela onde a funcao será executada */
+    }
+
+    var canvas = document.querySelector("canvas");/* comando para chamar a tela html no mundo javascript*/
+    var paintBrush = canvas.getContext("2d");/* comando para chamar a dimensao html no mundo javascript*/
+    var x = 10; /* setando o valor de x */
+    var y = 20; /* setando o valor de y */
+    var radius = 10; /* setando o valor do raio */
+
+    drawCanvas(); /* executando a funcao desenha tela */
+    
+    var returning = false; /* setando uma variável para definir a ordem para desenhar o circulo */
+
+    function playAnimation(){  /* funcao que reproduz a animacao do circulo */
+        cleanCanvas(); /*  porque não posso mudar ele de posicao? */
+        drawEdgeOncanvas(); /* executando a funcao de desenhar uma borda na tela */
+        if (x < 600 && returning == false){ /* setando uma condicao para que o circulo seja incrementado */
+            drawCircle(x, y, radius);/* se x for maior que 600 e ele nao esteja voltando a funcao desenha circulo sera executada */
+            x++; /* funcao desenha circulo sendo executada com um incremento de mais 1 */
+        } else if (x == 600){ /* setando uma condicao para que o circulo pare de ser incrementado */
+            returning = true;/* se x for igual a 600, esta condicao será encerrada */
+        }
+
+        if(x > 0 && returning == true){ /* setando a condicao quando x será decrescido, quando o circulo estiver voltando */
+            drawCircle(x, y, radius);/* o circulo agora é 600, ou seja, maior que 0, entao será executado a funcao desenha circulo */
+            x--; /* o x será decrescido menos 1, o circulo voltará */
+        } else if(x == 0){ /* setando uma condicao para que o circulo pare de ser decrescido */
+            returning = false;/* quando x for 0, entao a variavel voltando será falsa e retornará para o primeiro if da funcao 
+            pois x agora é 0 ou seja, menor que 600 e voltando é falso! */
+        }
+        
+        console.log(x + "," + y);/* comando para ver a posicao x e y no console*/
+    }
+
+
+    setInterval(playAnimation, 10);/* setando o tempo de execucao da funcao reproduzAnimacao */
+
+
+</script>

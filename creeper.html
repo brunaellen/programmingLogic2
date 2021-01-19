@@ -1,0 +1,46 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var canvas = document.querySelector("canvas");
+    var paintBrush = canvas.getContext("2d");
+
+    var headWidth = 350;
+    var headHeight = 300;
+    var headX = 0;
+    var headY = 0;
+
+    paintBrush.fillStyle = "darkgreen";
+    paintBrush.fillRect(headX, headY, headWidth, headWidth);
+
+    var noseWidth = 70;
+    var eyeWidth = 90;
+    var eyeHeight = 90;
+
+    var midpoint = (headWidth / 2);
+    var leftEyeX = midpoint - (noseWidth / 2) - eyeWidth;
+    var leftEyeY = 55;
+    var rightEyeY = 55;
+
+    var rightEyeX = midpoint + (noseWidth / 2);
+    paintBrush.fillStyle = "black";
+    paintBrush.fillRect(leftEyeX, leftEyeY, eyeWidth, eyeHeight);
+    paintBrush.fillRect(rightEyeX, rightEyeY, eyeWidth, eyeHeight);
+
+    var noseHeight = 100;
+    var noseX = leftEyeX + eyeWidth;
+    var noseY = leftEyeY + eyeHeight;
+    paintBrush.fillRect(noseX, noseY, noseWidth, noseHeight);
+
+    var lipsWidth = 40;
+    var lipsHeight = 110;
+    var leftLipX = leftEyeX + eyeWidth - lipsWidth;
+    var headHeightToEyeEnd = headY + (leftEyeY + eyeHeight);
+    var heightOfRectangle2 = headHeight - headHeightToEyeEnd - lipsHeight;
+    var lipsY = headHeightToEyeEnd + heightOfRectangle2;
+    
+    var rightLipsX = leftLipX + lipsWidth + noseWidth;
+    paintBrush.fillRect(leftLipX, lipsY, lipsWidth, lipsHeight);
+    paintBrush.fillRect(rightLipsX, lipsY, lipsWidth, lipsHeight);
+
+</script>

@@ -1,0 +1,89 @@
+<canvas width="1200" height="1200"></canvas>
+
+<script>
+
+    /* fazer uma bandeira do brasil, mostrar ela por 3 sec
+    e depois mostrar a bandeira da alemanha por 3 sec e depois retornar
+    p a bandeira brasileira.
+    passos:
+    - desenhar a bandeira brasileira (quadrado, losango e circulo)
+    - desenhar a bandeira d a alemanha(3 quadrados)
+    funcao brasil vai ser false
+    */
+
+
+var canvas = document.querySelector("canvas");
+var paintBrush = canvas.getContext("2d");
+
+function drawBrazilFlag(){
+    var width = 600;
+    var height = 400;
+    var xFlag = 400;
+    var yFlag = 150;
+    var radius = 100;
+
+    paintBrush.fillStyle = "green";
+    paintBrush.fillRect(xFlag,yFlag, width, height);
+
+    paintBrush.fillStyle = "yellow";
+    paintBrush.beginPath();
+    paintBrush.moveTo(xFlag + width/2, yFlag);
+    paintBrush.lineTo(xFlag, yFlag + height/2);
+    paintBrush.lineTo(xFlag + width, yFlag + height/2);
+    paintBrush.fill();
+
+    paintBrush.fillStyle = "yellow";
+    paintBrush.beginPath();
+    paintBrush.moveTo(xFlag + width/2, yFlag + height);
+    paintBrush.lineTo(xFlag, yFlag + height/2);
+    paintBrush.lineTo(xFlag + width, yFlag + height/2);
+    paintBrush.fill();
+
+    paintBrush.fillStyle = "darkblue";
+    paintBrush.beginPath();
+    paintBrush.arc(xFlag + width/2, yFlag + height/2, radius, 0, 2 * Math.PI);
+    paintBrush.fill();
+
+}
+
+function drawGermanyFlag(){
+    var width = 200;
+    var height = 400;
+    var xFlag = 400;
+    var yFlag = 150;
+
+    paintBrush.fillStyle = "black";
+    paintBrush.fillRect(xFlag,yFlag, width, height);
+    
+
+    paintBrush.fillStyle = "red";
+    paintBrush.fillRect(xFlag + width,yFlag, width, height);
+    
+
+    paintBrush.fillStyle = "yellow";
+    paintBrush.fillRect(xFlag + width * 2,yFlag, width, height); 
+    
+}
+
+function cleanCanvas(){
+    var width = 600;
+    var height = 400;
+    var xFlag = 400;
+    var yFlag = 150;
+    paintBrush.clearRect(xFlag,yFlag, width, height);
+}
+
+var showBrazilFlag = true;
+
+function chaneFlags(){
+    if(showBrazilFlag){
+        drawBrazilFlag();
+    } else if(!showBrazilFlag){ 
+        drawGermanyFlag();
+    }
+    showBrazilFlag = !showBrazilFlag;
+}
+
+setInterval(chaneFlags, 3000); 
+
+</script>

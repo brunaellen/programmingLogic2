@@ -1,0 +1,76 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    /* fazer um circulo pulsar */
+    /* passos:
+    - criar tela
+    - criar borda da tela
+    - criar circulo
+    - limpar tela
+    - incrementar circulo com raio de 20 até 30
+    - parar o incremento quando ele chegar no limite do raio(30)
+    - decrescer circulo quando ele chegar no limite
+    - para de decrescer quando ele chegar no valor do raio minimo(20)
+    - fazer com qu ele retorne para a condicao de incremento
+    */
+
+    function drawCanvas(){ /* funcao p desenhar tela */
+        paintBrush.fillStyle = "lightgray"; /* setando a cor da tela */
+        paintBrush.fillRect(0, 0, 600, 400); /* setando as dimensoes da tela */
+    }
+
+    function drawEdgeOncanvas(){ /* funcao p desenhar borda na tela */
+        paintBrush.strokeStyle = "black"; /* setando a cor da borda da tela */
+        paintBrush.strokeRect(0, 0, 600, 400); /* setando as dimensoes da borda da tela */
+        paintBrush.fill(); /* comando p preencher a borda da tela */
+    }
+
+    function drawCircle(x, y, radius){ /* funcao p desenhar circulo */
+        paintBrush.fillStyle = "red"; /* setando a cor do circulo */
+        paintBrush.beginPath(); /* comando do pincel para comecar a desenhar o circulo */
+        paintBrush.arc(x, y, radius, 0, 2 * Math.PI); /* delimitando as dimensoes p desenhar o circulo */
+        paintBrush.fill(); /* comando p preencher o circulo */
+    }
+
+    function cleanCanvas(){ /* funcao p limpar a tela cad vez que um círculo for desenhado */
+        paintBrush.clearRect(0, 0, 600, 400);/* dimensoes da tela onde a funcao será executada */
+    }
+
+    function conditionToIncrementCircle(){ /* funcao para delimitar o incremento do circulo */
+        if(radius < 30 && decreaseRadius == false){
+            drawCircle(x, y, radius);
+            radius++;
+        } else if(radius == 30){
+            decreaseRadius = true;
+        }
+        if (radius > 20 && decreaseRadius == true){
+            drawCircle(x, y, radius);
+            radius--;
+        } else if (radius == 20){
+            decreaseRadius = false;
+        } 
+    }
+
+    var canvas = document.querySelector("canvas");/* comando para chamar a tela html no mundo javascript*/
+    var paintBrush = canvas.getContext("2d");/* comando para chamar a dimensao html no mundo javascript*/
+    var x = 300; /* setando o valor de x */
+    var y = 200; /* setando o valor de y */
+    var radius = 20; /* setando o valor do raio */
+
+    var decreaseRadius = false;
+
+    function playCirclePulsating(){ /* funcao final para chamar as outras funções */
+        cleanCanvas();
+        drawCanvas();
+        drawEdgeOncanvas();
+        drawCircle(x, y, radius);
+        conditionToIncrementCircle();
+
+        console.log(radius);/* comando para ver o raio no console*/
+    }
+
+    setInterval(playCirclePulsating, 20);
+    
+
+</script>
